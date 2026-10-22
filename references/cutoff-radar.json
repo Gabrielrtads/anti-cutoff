@@ -1,0 +1,32 @@
+{
+  "models": {
+    "claude-3-7-sonnet": { "cutoff": "2025-02-01", "name": "Claude 3.7 Sonnet" },
+    "claude-3-5-sonnet": { "cutoff": "2024-10-22", "name": "Claude 3.5 Sonnet (Latest)" },
+    "claude-3-5-haiku": { "cutoff": "2024-07-01", "name": "Claude 3.5 Haiku" },
+    "gpt-4o": { "cutoff": "2024-10-01", "name": "GPT-4o (Omni)" },
+    "gpt-4o-mini": { "cutoff": "2024-10-01", "name": "GPT-4o Mini" },
+    "o1": { "cutoff": "2024-10-01", "name": "OpenAI o1" },
+    "o3-mini": { "cutoff": "2024-10-01", "name": "OpenAI o3-mini" },
+    "gemini-2-0-flash": { "cutoff": "2024-08-01", "name": "Gemini 2.0 Flash" },
+    "gemini-1-5-pro": { "cutoff": "2024-05-01", "name": "Gemini 1.5 Pro" },
+    "default": { "cutoff": "2024-10-22", "name": "Standard AI Cutoff Baseline" }
+  },
+  "canonical_llms": {
+    "n8n": "https://docs.n8n.io/llms.txt",
+    "next": "https://nextjs.org/docs/llms.txt",
+    "cloudflare": "https://developers.cloudflare.com/llms.txt",
+    "supabase": "https://supabase.com/docs/llms.txt",
+    "tailwindcss": "https://tailwindcss.com/docs/llms.txt",
+    "vercel": "https://vercel.com/docs/llms.txt",
+    "fastmcp": "https://jina.ai",
+    "remotion": "https://www.remotion.dev/docs/llms.txt",
+    "hono": "https://hono.dev/llms.txt",
+    "tanstack": "https://tanstack.com/llms.txt"
+  },
+  "risk_levels": {
+    "SAFE": { "max_months": 0, "color": "green", "label": "🟢 SAFE (Pre-Cutoff Knowledge)" },
+    "LOW": { "max_months": 3, "color": "yellow", "label": "🟡 LOW DRIFT (Minor Updates)" },
+    "MODERATE": { "max_months": 6, "color": "orange", "label": "🟠 MODERATE DRIFT (Feature Additions)" },
+    "CRITICAL": { "max_months": 999, "color": "red", "label": "🚨 CRITICAL CUTOFF DRIFT (High Hallucination & Breaking Changes Risk)" }
+  }
+}

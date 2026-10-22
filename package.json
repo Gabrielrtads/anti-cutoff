@@ -1,0 +1,41 @@
+{
+  "name": "anti-cutoff",
+  "version": "1.0.0",
+  "description": "The official vaccine for AI knowledge cutoffs. Detects post-cutoff dependencies, fetches live llms.txt docs, and synthesizes zero-hallucination expert skills.",
+  "type": "module",
+  "bin": {
+    "anti-cutoff": "./scripts/anti-cutoff.mjs"
+  },
+  "scripts": {
+    "start": "node ./scripts/anti-cutoff.mjs",
+    "radar": "node ./scripts/anti-cutoff.mjs radar",
+    "audit": "node ./scripts/anti-cutoff.mjs audit"
+  },
+  "keywords": [
+    "anti-cutoff",
+    "knowledge-cutoff",
+    "llms-txt",
+    "skills",
+    "claude",
+    "codex",
+    "gemini",
+    "antigravity",
+    "cursor",
+    "agent-skills",
+    "anti-hallucination",
+    "vibe-coding"
+  ],
+  "author": "Gabriel Toledo (@Gabrielrtads)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gabrielrtads/anti-cutoff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gabrielrtads/anti-cutoff/issues"
+  },
+  "homepage": "https://github.com/Gabrielrtads/anti-cutoff#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
