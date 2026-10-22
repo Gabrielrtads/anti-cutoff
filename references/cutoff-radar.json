@@ -1,17 +1,89 @@
 {
   "models": {
-    "gemini-3-8-flash": { "cutoff": "2025-01-01", "name": "Gemini 3.8 Flash (High/Med/Low)" },
-    "gemini-3-5-flash": { "cutoff": "2024-12-01", "name": "Gemini 3.5 Flash" },
-    "gemini-3-1-pro": { "cutoff": "2024-12-01", "name": "Gemini 3.1 Pro" },
-    "gemini-2-0-flash": { "cutoff": "2024-08-01", "name": "Gemini 2.0 Flash" },
-    "claude-3-7-sonnet": { "cutoff": "2025-02-01", "name": "Claude 3.7 Sonnet (Thinking)" },
-    "claude-3-5-sonnet": { "cutoff": "2024-10-22", "name": "Claude 3.5 Sonnet (Latest)" },
-    "claude-3-5-haiku": { "cutoff": "2024-07-01", "name": "Claude 3.5 Haiku" },
-    "o3-mini": { "cutoff": "2024-10-01", "name": "OpenAI o3-mini" },
-    "o1": { "cutoff": "2024-10-01", "name": "OpenAI o1" },
-    "gpt-4o": { "cutoff": "2024-10-01", "name": "GPT-4o (Omni)" },
-    "gpt-4o-mini": { "cutoff": "2024-10-01", "name": "GPT-4o Mini" },
-    "default": { "cutoff": "2024-10-22", "name": "Standard AI Cutoff Baseline" }
+    "gemini-4-argon": {
+      "cutoff": "2026-10-13",
+      "name": "Google: Gemini 4 Argon",
+      "provider": "google",
+      "openrouter_id": "google/gemini-4-argon",
+      "context_length": 1048576
+    },
+    "claude-haiku-5.5": {
+      "cutoff": "2026-10-07",
+      "name": "Anthropic: Claude Haiku 5.5",
+      "provider": "anthropic",
+      "openrouter_id": "anthropic/claude-haiku-5.5",
+      "context_length": 1000000
+    },
+    "gpt-6.1-sol": {
+      "cutoff": "2026-09-29",
+      "name": "OpenAI: GPT-6.1 Sol",
+      "provider": "openai",
+      "openrouter_id": "openai/gpt-6.1-sol",
+      "context_length": 1050000
+    },
+    "claude-sonnet-5.5": {
+      "cutoff": "2026-09-28",
+      "name": "Anthropic: Claude Sonnet 5.5",
+      "provider": "anthropic",
+      "openrouter_id": "anthropic/claude-sonnet-5.5",
+      "context_length": 1000000
+    },
+    "claude-opus-5.5": {
+      "cutoff": "2026-09-22",
+      "name": "Anthropic: Claude Opus 5.5",
+      "provider": "anthropic",
+      "openrouter_id": "anthropic/claude-opus-5.5",
+      "context_length": 1000000
+    },
+    "gpt-6-luna": {
+      "cutoff": "2026-09-22",
+      "name": "OpenAI: GPT-6 Luna",
+      "provider": "openai",
+      "openrouter_id": "openai/gpt-6-luna",
+      "context_length": 1050000
+    },
+    "deepseek-v4.1-flash": {
+      "cutoff": "2026-09-10",
+      "name": "DeepSeek: DeepSeek V4.1 Flash",
+      "provider": "deepseek",
+      "openrouter_id": "deepseek/deepseek-v4.1-flash",
+      "context_length": 1048576
+    },
+    "gpt-6-astra": {
+      "cutoff": "2026-09-04",
+      "name": "OpenAI: GPT-6 Astra",
+      "provider": "openai",
+      "openrouter_id": "openai/gpt-6-astra",
+      "context_length": 1050000
+    },
+    "gemini-3.8-flash": {
+      "cutoff": "2026-09-02",
+      "name": "Google: Gemini 3.8 Flash",
+      "provider": "google",
+      "openrouter_id": "google/gemini-3.8-flash",
+      "context_length": 1048576
+    },
+    "claude-fable-5.1": {
+      "cutoff": "2026-09-01",
+      "name": "Anthropic: Claude Fable 5.1",
+      "provider": "anthropic",
+      "openrouter_id": "anthropic/claude-fable-5.1",
+      "context_length": 1000000
+    },
+    "gemini-3.5-flash": {
+      "cutoff": "2026-05-19",
+      "name": "Google: Gemini 3.5 Flash",
+      "provider": "google",
+      "openrouter_id": "google/gemini-3.5-flash",
+      "context_length": 1048576
+    },
+    "default": {
+      "cutoff": "2026-09-28",
+      "name": "Standard AI Cutoff Baseline (Q4 2026)",
+      "provider": "anthropic",
+      "openrouter_id": "anthropic/claude-sonnet-5.5",
+      "context_length": 1000000
+    }
   },
   "canonical_llms": {
     "n8n": "https://docs.n8n.io/llms.txt",
@@ -29,8 +101,8 @@
   },
   "risk_levels": {
     "SAFE": { "max_months": 0, "color": "green", "label": "🟢 SAFE (Pre-Cutoff Knowledge)" },
-    "LOW": { "max_months": 3, "color": "yellow", "label": "🟡 LOW DRIFT (+0 to 3 months)" },
-    "MODERATE": { "max_months": 6, "color": "orange", "label": "🟠 MODERATE DRIFT (+3 to 6 months)" },
-    "CRITICAL": { "max_months": 999, "color": "red", "label": "🚨 CRITICAL CUTOFF DRIFT (+6+ months - High Hallucination Risk)" }
+    "LOW": { "max_months": 1, "color": "yellow", "label": "🟡 LOW DRIFT (+0 to 1 month)" },
+    "MODERATE": { "max_months": 3, "color": "orange", "label": "🟠 MODERATE DRIFT (+1 to 3 months)" },
+    "CRITICAL": { "max_months": 999, "color": "red", "label": "🚨 CRITICAL CUTOFF DRIFT (+3+ months - High Hallucination Risk)" }
   }
 }

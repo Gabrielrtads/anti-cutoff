@@ -1,11 +1,11 @@
 ---
 name: anti-cutoff
-description: O escudo definitivo contra o limite de corte de treino (Knowledge Cutoff) das IAs. Detecta defasagem temporal de bibliotecas (NPM e PyPI), ingere llms.txt oficiais e sintetiza vacinas anti-padrão sem alucinação.
+description: O escudo definitivo contra o limite de corte de treino (Knowledge Cutoff) das IAs. Sincroniza catálogo vivo via OpenRouter, detecta defasagem temporal de bibliotecas (NPM e PyPI) e sintetiza vacinas anti-padrão sem alucinação.
 ---
 
-# Anti-Cutoff: A Vacina Contra o Limite de Corte das IAs
+# Anti-Cutoff: A Vacina Contra o Limite de Corte das IAs (Geração 2026)
 
-O **`anti-cutoff`** elimina alucinações e erros causados pelo limite de corte de conhecimento (*Knowledge Cutoff*) dos modelos (Gemini, Claude, GPT). Ele calcula a defasagem temporal entre a data da versão oficial e o corte do modelo, baixa a documentação oficial crua (`llms.txt` / Jina) e guia o agente a sintetizar uma **Vacina Anti-Padrão** (tabela de códigos banidos vs vigentes).
+O **`anti-cutoff`** elimina alucinações e erros causados pelo limite de corte de conhecimento (*Knowledge Cutoff*) dos modelos (Gemini 4, Claude 5.5, GPT-6, DeepSeek v4). Ele sincroniza modelos vivos diretamente do OpenRouter, calcula a defasagem temporal exata, baixa a documentação oficial crua (`llms.txt` / Jina) e sintetiza uma **Vacina Anti-Padrão** (tabela de códigos banidos vs vigentes).
 
 ## 🚀 Quando Ativar Esta Skill
 - Sempre que o usuário mencionar `/anti-cutoff`, `anti-cutoff`, `verificar corte`, `atualizar vacina` ou perguntar se uma biblioteca é muito nova para a IA.
@@ -15,8 +15,11 @@ O **`anti-cutoff`** elimina alucinações e erros causados pelo limite de corte 
 ## 🛠️ Comandos do Motor
 
 ```bash
+# 0. Sincronizar catálogo vivo de modelos e datas de corte via OpenRouter API
+node scripts/anti-cutoff.mjs sync-models
+
 # 1. Checar o Radar de Corte de uma tecnologia (NPM ou Python PyPI)
-node scripts/anti-cutoff.mjs radar <package> [--model gemini-3-8-flash | claude-3-7-sonnet | default]
+node scripts/anti-cutoff.mjs radar <package> [--model gemini-4-argon | claude-sonnet-5.5 | gpt-6.1-sol | default]
 
 # 2. Auditar todas as dependências de um projeto em paralelo
 node scripts/anti-cutoff.mjs audit [caminho_do_projeto]
@@ -28,13 +31,13 @@ node scripts/anti-cutoff.mjs vaccine <package> --local
 node scripts/anti-cutoff.mjs vaccine <package> --global
 ```
 
-## 🧠 Fluxo de Execução do Agente (Fim da Ilusão de Automação)
+## 🧠 Fluxo de Execução do Agente
 
 ### 1. Diagnóstico Temporal (Cutoff Radar)
 1. Rode `node scripts/anti-cutoff.mjs radar <tech>`.
 2. O radar busca automaticamente no **NPM** e faz fallback para o **PyPI (Python)**.
 3. Avalie o **Cutoff Gap**:
-   - **Risco CRÍTICO (+6 meses)**: É estritamente proibido confiar na memória de treino. O agente deve puxar a documentação viva antes de codar.
+   - **Risco CRÍTICO (+3 meses pós-corte)**: É estritamente proibido confiar na memória de treino. O agente deve puxar a documentação viva antes de codar.
 
 ### 2. Ingestão Real da Documentação
 1. Ao rodar `node scripts/anti-cutoff.mjs vaccine <tech> --local`:

@@ -20,10 +20,10 @@ function loadRadar() {
   if (!fs.existsSync(radarPath)) {
     return {
       models: {
-        "gemini-3-8-flash": { cutoff: "2025-01-01", name: "Gemini 3.8 Flash" },
-        "claude-3-7-sonnet": { cutoff: "2025-02-01", name: "Claude 3.7 Sonnet" },
-        "claude-3-5-sonnet": { cutoff: "2024-10-22", name: "Claude 3.5 Sonnet (Latest)" },
-        "default": { cutoff: "2024-10-22", name: "Standard AI Cutoff Baseline" }
+        "claude-sonnet-5.5": { cutoff: "2026-09-28", name: "Claude Sonnet 5.5" },
+        "gemini-3.8-flash": { cutoff: "2026-09-02", name: "Gemini 3.8 Flash" },
+        "gpt-6.1-sol": { cutoff: "2026-09-29", name: "GPT-6.1 Sol" },
+        "default": { cutoff: "2026-09-28", name: "Standard AI Cutoff Baseline (Q4 2026)" }
       },
       canonical_llms: {
         "n8n": "https://docs.n8n.io/llms.txt",
@@ -66,9 +66,9 @@ function calculateCutoffGap(releaseDateStr, cutoffDateStr) {
 
 function getRiskCategory(diffMonths) {
   if (diffMonths <= 0) return { level: "SAFE", label: "🟢 SAFE (Pre-Cutoff Knowledge)" };
-  if (diffMonths <= 3) return { level: "LOW", label: "🟡 LOW DRIFT (+0 to 3 months)" };
-  if (diffMonths <= 6) return { level: "MODERATE", label: "🟠 MODERATE DRIFT (+3 to 6 months)" };
-  return { level: "CRITICAL", label: "🚨 CRITICAL CUTOFF DRIFT (+6+ months - High Hallucination Risk)" };
+  if (diffMonths <= 1) return { level: "LOW", label: "🟡 LOW DRIFT (+0 to 1 month)" };
+  if (diffMonths <= 3) return { level: "MODERATE", label: "🟠 MODERATE DRIFT (+1 to 3 months)" };
+  return { level: "CRITICAL", label: "🚨 CRITICAL CUTOFF DRIFT (+3+ months - High Hallucination Risk)" };
 }
 
 // Universal Package Resolver (NPM -> PyPI)
@@ -119,8 +119,72 @@ async function fetchPackageMetadata(pkgName) {
   return null;
 }
 
+// Live OpenRouter Sync
+export async function syncModelsFromOpenRouter() {
+  console.log(`\n======================================================`);
+  console.log(`🔄 SYNCING FRONTIER MODELS FROM OPENROUTER API...`);
+  console.log(`======================================================`);
+
+  try {
+    const res = await fetchWithTimeout("https://openrouter.ai/api/v1/models", {}, 10000);
+    if (!res.ok) {
+      throw new Error(`OpenRouter API responded with HTTP ${res.status}`);
+    }
+
+    const json = await res.json();
+    const models = json.data || [];
+
+    const targets = [
+      "google/gemini-4-argon",
+      "google/gemini-3.8-flash",
+      "google/gemini-3.5-flash",
+      "anthropic/claude-sonnet-5.5",
+      "anthropic/claude-opus-5.5",
+      "anthropic/claude-haiku-5.5",
+      "anthropic/claude-fable-5.1",
+      "openai/gpt-6.1-sol",
+      "openai/gpt-6-luna",
+      "openai/gpt-6-astra",
+      "deepseek/deepseek-v4.1-flash"
+    ];
+
+    const currentRadar = loadRadar();
+    let updatedCount = 0;
+
+    for (const t of targets) {
+      const found = models.find(m => m.id === t);
+      if (found) {
+        const releaseDate = new Date(found.created * 1000).toISOString().split("T")[0];
+        const key = found.id.split("/")[1];
+        currentRadar.models[key] = {
+          cutoff: releaseDate,
+          name: found.name,
+          provider: found.id.split("/")[0],
+          openrouter_id: found.id,
+          context_length: found.context_length
+        };
+        console.log(`   ✅ Synced: ${found.name.padEnd(35)} -> Cutoff: ${releaseDate}`);
+        updatedCount++;
+      }
+    }
+
+    // Set canonical default
+    currentRadar.models["default"] = {
+      cutoff: currentRadar.models["claude-sonnet-5.5"]?.cutoff || "2026-09-28",
+      name: "Standard AI Cutoff Baseline (Q4 2026)",
+      provider: "anthropic",
+      openrouter_id: "anthropic/claude-sonnet-5.5"
+    };
+
+    fs.writeFileSync(radarPath, JSON.stringify(currentRadar, null, 2), "utf-8");
+    console.log(`\n🎉 Success: ${updatedCount} frontier models synchronized in cutoff-radar.json!`);
+  } catch (err) {
+    console.error(`❌ Failed to sync models from OpenRouter:`, err.message);
+  }
+}
+
 // 1. Radar Command
-export async function inspectPackageRadar(pkgName, modelKey = "claude-3-5-sonnet") {
+export async function inspectPackageRadar(pkgName, modelKey = "default") {
   const model = radar.models[modelKey] || radar.models["default"];
   console.log(`\n======================================================`);
   console.log(`🎯 ANTI-CUTOFF RADAR: [${pkgName}]`);
@@ -192,7 +256,7 @@ export async function inspectPackageRadar(pkgName, modelKey = "claude-3-5-sonnet
 }
 
 // 2. Audit Command (Scans package.json with Concurrency)
-export async function auditDirectory(targetDir = process.cwd(), modelKey = "claude-3-5-sonnet") {
+export async function auditDirectory(targetDir = process.cwd(), modelKey = "default") {
   const model = radar.models[modelKey] || radar.models["default"];
   const pkgJsonPath = path.join(targetDir, "package.json");
 
@@ -388,6 +452,9 @@ async function main() {
 Author: Gabriel Toledo (@Gabrielrtads) | License: MIT
 
 Usage:
+  node scripts/anti-cutoff.mjs sync-models
+      Live sync frontier AI models and cutoffs directly from OpenRouter API.
+
   node scripts/anti-cutoff.mjs radar <package> [--model <model_key>]
       Check package release date (NPM or PyPI) vs AI model knowledge cutoff.
 
@@ -400,16 +467,18 @@ Usage:
     return;
   }
 
-  if (cmd === "radar") {
+  if (cmd === "sync-models" || cmd === "sync") {
+    await syncModelsFromOpenRouter();
+  } else if (cmd === "radar") {
     if (!arg) {
       console.error("Error: Please specify package name (e.g. node scripts/anti-cutoff.mjs radar n8n)");
       process.exit(1);
     }
-    const modelKey = flag === "--model" ? extra : "claude-3-5-sonnet";
+    const modelKey = flag === "--model" ? extra : "default";
     await inspectPackageRadar(arg, modelKey);
   } else if (cmd === "audit") {
     const targetDir = (arg && !arg.startsWith("--")) ? arg : process.cwd();
-    const modelKey = (arg === "--model" ? flag : (flag === "--model" ? extra : "claude-3-5-sonnet"));
+    const modelKey = (arg === "--model" ? flag : (flag === "--model" ? extra : "default"));
     await auditDirectory(targetDir, modelKey);
   } else if (cmd === "vaccine" || cmd === "generate") {
     if (!arg) {
