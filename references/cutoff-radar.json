@@ -1,14 +1,16 @@
 {
   "models": {
-    "claude-3-7-sonnet": { "cutoff": "2025-02-01", "name": "Claude 3.7 Sonnet" },
+    "gemini-3-8-flash": { "cutoff": "2025-01-01", "name": "Gemini 3.8 Flash (High/Med/Low)" },
+    "gemini-3-5-flash": { "cutoff": "2024-12-01", "name": "Gemini 3.5 Flash" },
+    "gemini-3-1-pro": { "cutoff": "2024-12-01", "name": "Gemini 3.1 Pro" },
+    "gemini-2-0-flash": { "cutoff": "2024-08-01", "name": "Gemini 2.0 Flash" },
+    "claude-3-7-sonnet": { "cutoff": "2025-02-01", "name": "Claude 3.7 Sonnet (Thinking)" },
     "claude-3-5-sonnet": { "cutoff": "2024-10-22", "name": "Claude 3.5 Sonnet (Latest)" },
     "claude-3-5-haiku": { "cutoff": "2024-07-01", "name": "Claude 3.5 Haiku" },
+    "o3-mini": { "cutoff": "2024-10-01", "name": "OpenAI o3-mini" },
+    "o1": { "cutoff": "2024-10-01", "name": "OpenAI o1" },
     "gpt-4o": { "cutoff": "2024-10-01", "name": "GPT-4o (Omni)" },
     "gpt-4o-mini": { "cutoff": "2024-10-01", "name": "GPT-4o Mini" },
-    "o1": { "cutoff": "2024-10-01", "name": "OpenAI o1" },
-    "o3-mini": { "cutoff": "2024-10-01", "name": "OpenAI o3-mini" },
-    "gemini-2-0-flash": { "cutoff": "2024-08-01", "name": "Gemini 2.0 Flash" },
-    "gemini-1-5-pro": { "cutoff": "2024-05-01", "name": "Gemini 1.5 Pro" },
     "default": { "cutoff": "2024-10-22", "name": "Standard AI Cutoff Baseline" }
   },
   "canonical_llms": {
@@ -18,15 +20,17 @@
     "supabase": "https://supabase.com/docs/llms.txt",
     "tailwindcss": "https://tailwindcss.com/docs/llms.txt",
     "vercel": "https://vercel.com/docs/llms.txt",
-    "fastmcp": "https://jina.ai",
+    "fastmcp": "https://raw.githubusercontent.com/jlowin/fastmcp/main/README.md",
+    "unsloth": "https://raw.githubusercontent.com/unslothai/unsloth/main/README.md",
     "remotion": "https://www.remotion.dev/docs/llms.txt",
     "hono": "https://hono.dev/llms.txt",
-    "tanstack": "https://tanstack.com/llms.txt"
+    "tanstack": "https://tanstack.com/llms.txt",
+    "zod": "https://zod.dev/llms.txt"
   },
   "risk_levels": {
     "SAFE": { "max_months": 0, "color": "green", "label": "🟢 SAFE (Pre-Cutoff Knowledge)" },
-    "LOW": { "max_months": 3, "color": "yellow", "label": "🟡 LOW DRIFT (Minor Updates)" },
-    "MODERATE": { "max_months": 6, "color": "orange", "label": "🟠 MODERATE DRIFT (Feature Additions)" },
-    "CRITICAL": { "max_months": 999, "color": "red", "label": "🚨 CRITICAL CUTOFF DRIFT (High Hallucination & Breaking Changes Risk)" }
+    "LOW": { "max_months": 3, "color": "yellow", "label": "🟡 LOW DRIFT (+0 to 3 months)" },
+    "MODERATE": { "max_months": 6, "color": "orange", "label": "🟠 MODERATE DRIFT (+3 to 6 months)" },
+    "CRITICAL": { "max_months": 999, "color": "red", "label": "🚨 CRITICAL CUTOFF DRIFT (+6+ months - High Hallucination Risk)" }
   }
 }

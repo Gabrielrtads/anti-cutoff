@@ -1,5 +1,9 @@
 # 🛡️ Anti-Cutoff
 
+[![GitHub stars](https://img.shields.io/github/stars/Gabrielrtads/anti-cutoff?style=social)](https://github.com/Gabrielrtads/anti-cutoff/stargazers)
+
+> ⭐ **If this tool saved you time or empowered your AI agents, please star this repository! It helps more developers discover the project.**
+
 > **The Official Vaccine for AI Knowledge Cutoffs.**  
 > Automatically detects post-cutoff library drifts, fetches authoritative `llms.txt` docs, and synthesizes zero-hallucination expert skills with anti-pattern shields.
 
