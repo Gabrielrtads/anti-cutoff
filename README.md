@@ -9,6 +9,7 @@
 
 [![Install via Skills.sh](https://img.shields.io/badge/skills.sh-anti--cutoff-blue.svg)](https://skills.sh)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI & Test Suite](https://github.com/Gabrielrtads/anti-cutoff/actions/workflows/ci.yml/badge.svg)](https://github.com/Gabrielrtads/anti-cutoff/actions)
 [![Built for AI Agents](https://img.shields.io/badge/Agents-Claude%20%7C%20Codex%20%7C%20Gemini-purple.svg)]()
 
 ---
