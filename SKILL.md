@@ -1,6 +1,9 @@
 ---
 name: anti-cutoff
-description: O escudo definitivo contra o limite de corte de treino (Knowledge Cutoff) das IAs. Sincroniza catálogo vivo via OpenRouter, detecta defasagem temporal de bibliotecas (NPM e PyPI) e sintetiza vacinas anti-padrão sem alucinação.
+version: 1.1.0
+category: coding
+description: "The official vaccine against AI knowledge cutoffs. Synchronizes live model dates via OpenRouter, detects post-cutoff library drifts (NPM & PyPI), fetches live llms.txt docs, and synthesizes zero-hallucination expert anti-pattern skills. / O escudo definitivo contra o limite de corte de treino (Knowledge Cutoff) das IAs. Trigger with /anti-cutoff, 'check cutoff', 'audit dependencies', 'verificar corte', 'gerar vacina', or 'sync models'."
+tags: [anti-cutoff, knowledge-cutoff, ai-vaccine, anti-hallucination, openrouter, llms-txt, npm-drift, pypi-drift, zero-hallucination, breaking-changes, claude-code, codex, antigravity, vibe-coding]
 ---
 
 # Anti-Cutoff: A Vacina Contra o Limite de Corte das IAs (Geração 2026)

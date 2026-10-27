@@ -1,16 +1,22 @@
 # 🛡️ Anti-Cutoff
 
+> **The Official Vaccine for AI Knowledge Cutoffs (2026 Frontier Edition).**  
+> *(Automatically synchronizes live frontier models via OpenRouter, detects post-cutoff library drifts, fetches authoritative `llms.txt` docs, and synthesizes zero-hallucination expert skills).*
+
+[![skills.sh compatible](https://img.shields.io/badge/skills.sh-anti--cutoff-6366f1?style=for-the-badge)](https://skills.sh)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=for-the-badge)](LICENSE)
+[![Zero-Hallucination](https://img.shields.io/badge/Mode-Zero_Hallucination-blue?style=for-the-badge)](#)
+[![Multi-Model](https://img.shields.io/badge/Supports-Claude_|_Codex_|_Gemini-purple?style=for-the-badge)](#)
+[![CI & Test Suite](https://github.com/Gabrielrtads/anti-cutoff/actions/workflows/ci.yml/badge.svg)](https://github.com/Gabrielrtads/anti-cutoff/actions)
 [![GitHub stars](https://img.shields.io/github/stars/Gabrielrtads/anti-cutoff?style=social)](https://github.com/Gabrielrtads/anti-cutoff/stargazers)
 
-> ⭐ **If this tool saved you time or empowered your AI agents, please star this repository! It helps more developers discover the project.**
+```bash
+# ⚡ 1-Click Install via skills.sh (Claude Code / Codex / Antigravity):
+npx skills add Gabrielrtads/anti-cutoff
 
-> **The Official Vaccine for AI Knowledge Cutoffs (2026 Frontier Edition).**  
-> Automatically synchronizes live frontier models via OpenRouter, detects post-cutoff library drifts, fetches authoritative `llms.txt` docs, and synthesizes zero-hallucination expert skills with anti-pattern shields.
-
-[![Install via Skills.sh](https://img.shields.io/badge/skills.sh-anti--cutoff-blue.svg)](https://skills.sh)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![CI & Test Suite](https://github.com/Gabrielrtads/anti-cutoff/actions/workflows/ci.yml/badge.svg)](https://github.com/Gabrielrtads/anti-cutoff/actions)
-[![Built for AI Agents](https://img.shields.io/badge/Agents-Claude%20%7C%20Codex%20%7C%20Gemini-purple.svg)]()
+# Or check the cutoff gap of any library immediately:
+node scripts/anti-cutoff.mjs radar react
+```
 
 ---
 
@@ -160,3 +166,22 @@ flowchart LR
 MIT License. Designed and built by **Gabriel Toledo ([@Gabrielrtads](https://github.com/Gabrielrtads))**, creator of `vibe-design-studio`, `sta`, `kage-bunshin`, and `agent-log`.
 
 ⭐ **If `anti-cutoff` saved you from debugging hallucinated code, star the repo on GitHub!**
+
+---
+
+<div align="center">
+
+### ⭐ Impressed with Anti-Cutoff?
+If this tool saved you from outdated hallucinations or breaking changes, please star the repository!  
+It helps other autonomous agent developers discover the project.
+
+[![Star on GitHub](https://img.shields.io/github/stars/Gabrielrtads/anti-cutoff?style=social)](https://github.com/Gabrielrtads/anti-cutoff/stargazers)
+
+---
+
+**Built with pride by [Gabriel Toledo (@Gabrielrtads)](https://github.com/Gabrielrtads)**  
+*Creator of [Barber.fi](https://painel.barberfi.com.br), `vibe-design-studio`, `sta`, `kage-bunshin`, and `agent-log`.*
+
+Licensed under [MIT](LICENSE).
+
+</div>
